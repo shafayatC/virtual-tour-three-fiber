@@ -6,7 +6,7 @@ import { Popconfirm } from 'antd'
 
 const store = [
     // { name: 'room one', color: 'lightpink', position: [10, 0, -15], url: '/2294472375_24a3b8ef46_o.jpg', link: 1 },
-    { name: 'room two', color: 'lightblue', position: [15, 0, 0], url: '/Photosphere1.jpg', link: 1 },
+    { name: 'room two', color: 'lightblue', position: [15, 0, 0], url: '/6_F_Floor_Hallway copy.webp', link: 1 },
     { name: 'room two', color: 'lightblue', position: [30,-40,-60], url: '/Photosphere1.jpg', link: 0 },
     { name: 'room three', color: 'lightblue', position: [15, 0, 0], url: '/shot-panoramic-composition-bedroom.jpg', link: 3 },
     { name: 'outdoor one', color: 'lightblue', position: [15, 0, 0], url: '/updateimage (2).jpg', link: 4 },

@@ -5,6 +5,7 @@ import { Html, Preload, OrbitControls, Box, Ring, Circle } from '@react-three/dr
 import { Popconfirm } from 'antd'
 import { MathUtils } from 'three/src/Three.js'
 import { Bloom, DepthOfField, EffectComposer, Noise, Vignette } from '@react-three/postprocessing'
+import { useSpring, animated } from '@react-spring/three'
 
 const store = [
     { name: 'room two', color: 'lightblue', position: [30, -40, -60], url: '/Exam_Room_Low_Res.webp', link: 1 },
@@ -59,7 +60,7 @@ export function DomeTestEffect({ name, position, texture, onClick }) {
         console.log("prev texture : ", prevTexture);
         console.log("current texture : ", texture);
         // setPrevTexture(texture);
-        if(!checkFirstRun){
+        if (!checkFirstRun) {
             setSwitchImage(true);
             setTimeout(() => {
                 setSwitchImage(false);
@@ -74,6 +75,54 @@ export function DomeTestEffect({ name, position, texture, onClick }) {
     //     const targetOpacity = MathUtils.lerp(getOpactiy, 0, 0.3);
     //     setOpacity(targetOpacity);
     // })
+
+    const [springs, api] = useSpring(
+        () => ({
+            scale: 1,
+            position: [0, 0],
+            opacity: 1,
+            color: '#b70206',
+            config: key => {
+                switch (key) {
+                    case 'scale':
+                        return {
+                            mass: 4,
+                            friction: 10,
+                        }
+                    case 'position':
+                        return { mass: 4, friction: 220 }
+                    case 'opacity':
+                        return { mass: 4, friction: 220 }
+                    default:
+                        return {}
+                }
+            },
+        }),
+        []
+    )
+    const handlePointerEnter = () => {
+        api.start({
+            scale: 1.5,
+            opacity: 0,
+        })
+    }
+
+    const handlePointerLeave = () => {
+        api.start({
+            scale: 1,
+            opacity: 1,
+        })
+    }
+
+    useFrame(() => {
+        // Update the animation properties continuously
+        api.start({
+          scale: 1 + Math.sin(Date.now() * 0.005) * 0.1, // Pulsating effect
+        //   opacity: 0.5 + Math.sin(Date.now() * 0.005) * 0.5, // Opacity pulsing
+        //   color: `rgb(${Math.abs(Math.sin(Date.now() * 0.001) * 255)}, 109, 109)`, // Changing color effect
+        });
+      });
+
     return (
         <>
             <group>
@@ -98,7 +147,7 @@ export function DomeTestEffect({ name, position, texture, onClick }) {
                     </EffectComposer>
                 }
 
-                <mesh position={position}>
+                {/* <mesh position={position}>
                     <sphereGeometry args={[1.25, 32, 32]} />
                     <meshBasicMaterial color="white" />
                     <Html center>
@@ -107,8 +156,7 @@ export function DomeTestEffect({ name, position, texture, onClick }) {
                         <div style={{ color: 'white', background: 'black', padding: '5px', position: 'fixed', top: '0', left: '0' }}>UI Element
                         </div>
                     </Html>
-                </mesh>
-
+                </mesh> */}
                 <group
                     onPointerEnter={onMouseEnterFunc}
                     onPointerLeave={onMouseExitFunc}
@@ -125,6 +173,34 @@ export function DomeTestEffect({ name, position, texture, onClick }) {
                         <meshBasicMaterial transparent={true} opacity={0} />
                     </mesh>
                 </group>
+
+
+
+
+                <group
+                    onPointerEnter={onMouseEnterFunc}
+                    onPointerLeave={onMouseExitFunc}
+                    onPointerDown={onClick}
+                    //  scale={[0.5, 0.5, 0.5]} 
+                    rotation={[-Math.PI / 2, 0, 0]}
+                    position={[0, 0, 2.5]}>
+
+                    <animated.mesh
+                        onPointerEnter={handlePointerEnter}
+                        onPointerLeave={handlePointerLeave}
+                        scale={springs.scale}
+                        // material-opacity={springs.opacity} // Apply opacity at the mesh level
+                    >
+                        <sphereGeometry args={[0.1, 32, 32]} />
+                        <animated.meshBasicMaterial
+                            color={springs.color}
+                            transparent={true}
+                            // opacity={springs.opacity}
+                        />
+                    </animated.mesh>
+
+                </group>
+
 
             </group>
         </>

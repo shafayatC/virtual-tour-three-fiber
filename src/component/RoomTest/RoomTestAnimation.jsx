@@ -15,7 +15,7 @@ const store = [
     // { name: 'outdoor two', color: 'lightblue', position: [15, 0, 0], url: '/updateimage (1).jpg', link: 0 }
 ]
 
-export function DomeTest({ name, position, texture, onClick, swithcPostionP}) {
+export function DomeTest({ name, position, texture, onClick, swithcPostionP }) {
 
     const [hovered, setHovered] = useState(false);
     const [clicked, setClicked] = useState(false)
@@ -40,12 +40,12 @@ export function DomeTest({ name, position, texture, onClick, swithcPostionP}) {
 
     useEffect(() => {
         // alert(" id: " + swithcPostionP);
-    }, [swithcPostionP, ])
+    }, [swithcPostionP,])
 
     return (
         <>
             <group>
-                <mesh >
+                {/* <mesh >
                     <sphereGeometry rotateY={-180} args={[500, 40, 60]} />
                     <meshBasicMaterial rotation={[-Math.PI / 2, 0, 0]} map={texture} side={THREE.BackSide} />
                 </mesh>
@@ -57,8 +57,8 @@ export function DomeTest({ name, position, texture, onClick, swithcPostionP}) {
                         <div style={{ color: 'white', background: 'black', padding: '5px', position: 'fixed', top: '0', left: '0' }}>UI Element
                         </div>
                     </Html>
-                </mesh>
-                <group
+                </mesh> */}
+                {/* <group
                     onPointerEnter={onMouseEnterFunc}
                     onPointerLeave={onMouseExitFunc}
                     onPointerDown={onClick}
@@ -73,7 +73,11 @@ export function DomeTest({ name, position, texture, onClick, swithcPostionP}) {
                         <circleGeometry />
                         <meshBasicMaterial transparent={true} opacity={0} />
                     </mesh>
-                </group>
+                    <mesh>
+                        <sphereGeometry args={[1, 32, 32]} />
+                        <meshStandardMaterial color="blue" />
+                    </mesh>
+                </group> */}
 
             </group>
         </>

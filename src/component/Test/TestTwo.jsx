@@ -18,6 +18,9 @@ function ZoomButtons() {
   useEffect(()=>{
     zoomIn()
   },[])
+
+
+
   return (
     <div style={{ position: 'absolute', top: '10px', right: '10px' }}>
       <button onClick={zoomIn} style={{ margin: '5px' }}>Zoom In</button>

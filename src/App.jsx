@@ -61,12 +61,16 @@ function App() {
       {/* </div> */}
 
       {/* <Testgui /> */}
-        {/* <TestTwo/> */}
-        {/* <VirtualTour/> */}
-        {/* <TestPage/> */}
-        <Suspense fallback={<p>My Testing load...</p>}>
-        <MarkdownPreview/>
-        </Suspense>
+      {/* <TestTwo/> */}
+      {/* <VirtualTour/> */}
+      {/* <TestPage/> */}
+      <Suspense fallback={
+        <div className='w-full h-full bg-black fixed top-0 left-0'>
+          {/* <p>Test loding ... </p> */}
+        </div>
+      }>
+        <MarkdownPreview />
+      </Suspense>
 
       {/* 
       <KeyboardControls map={map}>

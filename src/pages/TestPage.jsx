@@ -52,10 +52,23 @@ const TestPage = () => {
 
   }
   
+  // hande zoom in and out by mouse scroll 
+  useEffect(() => {
+    const handleScroll = (event) => {
+        if (event.deltaY < 0) {
+          handleZoomIn();
+        } else {
+          handleZoomOut();
+        }
+    };
+    window.addEventListener("wheel", handleScroll);
+    return () => window.removeEventListener("wheel", handleScroll);
+}, []);
+
   return (
     <>
       <div className="h-screen z-0 relative">
-        <Suspense fallback={<p>...loading</p>}>
+        <Suspense fallback={null}>
         <Canvas
           flat
           linear

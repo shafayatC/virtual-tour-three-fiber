@@ -117,11 +117,11 @@ export function DomeTestEffect({ name, position, texture, onClick }) {
     useFrame(() => {
         // Update the animation properties continuously
         api.start({
-          scale: 1 + Math.sin(Date.now() * 0.005) * 0.1, // Pulsating effect
-        //   opacity: 0.5 + Math.sin(Date.now() * 0.005) * 0.5, // Opacity pulsing
-        //   color: `rgb(${Math.abs(Math.sin(Date.now() * 0.001) * 255)}, 109, 109)`, // Changing color effect
+            scale: 1 + Math.sin(Date.now() * 0.005) * 0.1, // Pulsating effect
+            //   opacity: 0.5 + Math.sin(Date.now() * 0.005) * 0.5, // Opacity pulsing
+            //   color: `rgb(${Math.abs(Math.sin(Date.now() * 0.001) * 255)}, 109, 109)`, // Changing color effect
         });
-      });
+    });
 
     return (
         <>
@@ -147,16 +147,20 @@ export function DomeTestEffect({ name, position, texture, onClick }) {
                     </EffectComposer>
                 }
 
-                {/* <mesh position={position}>
-                    <sphereGeometry args={[1.25, 32, 32]} />
-                    <meshBasicMaterial color="white" />
+                <mesh position={position}>
+                    {/* <sphereGeometry args={[1.25, 32, 32]} />
+                    <meshBasicMaterial color="white" /> */}
                     <Html center>
 
-                        <button onClick={onClick}>{name}</button>
+                        <span class="cursor-pointer relative flex items-center justify-center size-6" onClick={onClick}>
+                            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#FF0062] opacity-75"></span>
+                            <span class="relative inline-flex size-4 rounded-full bg-[#FF0062]"></span>
+                        </span>
+                        {/* <button className='bg-red-500' onClick={onClick}>{name} hello</button>
                         <div style={{ color: 'white', background: 'black', padding: '5px', position: 'fixed', top: '0', left: '0' }}>UI Element
-                        </div>
+                        </div> */}
                     </Html>
-                </mesh> */}
+                </mesh>
                 <group
                     onPointerEnter={onMouseEnterFunc}
                     onPointerLeave={onMouseExitFunc}
@@ -189,13 +193,13 @@ export function DomeTestEffect({ name, position, texture, onClick }) {
                         onPointerEnter={handlePointerEnter}
                         onPointerLeave={handlePointerLeave}
                         scale={springs.scale}
-                        // material-opacity={springs.opacity} // Apply opacity at the mesh level
+                    // material-opacity={springs.opacity} // Apply opacity at the mesh level
                     >
                         <sphereGeometry args={[0.1, 32, 32]} />
                         <animated.meshBasicMaterial
                             color={springs.color}
                             transparent={true}
-                            // opacity={springs.opacity}
+                        // opacity={springs.opacity}
                         />
                     </animated.mesh>
 
